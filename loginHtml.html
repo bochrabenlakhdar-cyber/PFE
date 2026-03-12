@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Statistiques Agricoles Algériennes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="loginHtml.css">
+</head>
+<body>
+
+    <div class="bg-layer"></div>
+    <div class="floating-particles" id="particles"></div>
+
+    <!-- ═══════════════════════════════════════════
+         HEADER — same structure as index
+         ═══════════════════════════════════════════ -->
+    <header>
+        <a class="logo" href="index1.html">
+            <div class="logo-wrap">
+                <div>green<span>ish</span></div>
+                <div class="logo-subtitle lang-text" data-fr="Portail Agricole National" data-ar="البوابة الفلاحية الوطنية">Portail Agricole National</div>
+            </div>
+        </a>
+
+        <nav>
+            <ul>
+                <li><a href="index1.html#home"     class="lang-text" data-ar="الرئيسية"   data-fr="Accueil">Accueil</a></li>
+                <li><a href="index1.html#services"  class="lang-text" data-ar="الخدمات"    data-fr="Services">Services</a></li>
+                <li><a href="index1.html#dashboard" class="lang-text" data-ar="الخريطة"    data-fr="Carte SIG">Carte SIG</a></li>
+                <li><a href="index1.html#contact"   class="lang-text" data-ar="اتصل بنا"   data-fr="Contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a id="login-btn" href="index1.html">
+                <i class="fas fa-home"></i>
+                <span class="lang-text" data-ar="الرئيسية" data-fr="Accueil">Accueil</span>
+            </a>
+            <button id="lang-toggle" onclick="toggleLanguage()">
+                <i class="fas fa-globe"></i>
+                <span>AR / FR</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════
+         MAIN
+         ═══════════════════════════════════════════ -->
+    <div class="page-wrapper">
+        <div class="login-card">
+
+            <!-- BRAND PANEL -->
+            <div class="brand-panel">
+                <div class="emblem"><i class="fas fa-seedling"></i></div>
+
+                <div>
+                    <div class="republic lang-text"
+                         data-fr="République Algérienne Démocratique et Populaire"
+                         data-ar="الجمهورية الجزائرية الديمقراطية الشعبية">
+                        République Algérienne Démocratique et Populaire
+                    </div>
+                </div>
+
+                <div class="ministry-title">
+                    <i class="fas fa-leaf"></i>
+                    <span class="lang-text"
+                          data-fr="Ministère de l'Agriculture et du Développement Rural"
+                          data-ar="وزارة الفلاحة والتنمية الريفية">
+                        Ministère de l'Agriculture et du Développement Rural
+                    </span>
+                    <div style="font-size:0.82rem;color:rgba(245,241,232,0.6);font-family:'Cairo',sans-serif;margin-top:5px;">
+                        <span class="lang-text"
+                              data-fr="Direction des Statistiques Agricoles"
+                              data-ar="مديرية الإحصاءات الفلاحية">
+                            Direction des Statistiques Agricoles
+                        </span>
+                    </div>
+                </div>
+
+                <div class="survey-badge">
+                    🌾
+                    <span class="lang-text"
+                          data-fr="Recensement Général de l'Agriculture 2026"
+                          data-ar="الإحصاء العام للفلاحة 2025">
+                        Recensement Général de l'Agriculture 2026
+                    </span>
+                </div>
+
+                <div class="brand-quote lang-text"
+                     data-fr="Pour une agriculture algérienne durable et un avenir vert pour nos générations futures."
+                     data-ar="من أجل فلاحة جزائرية مستدامة وغد أخضر لأجيالنا القادمة.">
+                    Pour une agriculture algérienne durable et un avenir vert pour nos générations futures.
+                </div>
+            </div>
+
+            <!-- FORM PANEL -->
+            <div class="form-panel">
+
+                <!-- Tab switcher -->
+                <div class="form-tabs">
+                    <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span class="lang-text" data-fr="Connexion" data-ar="تسجيل الدخول">Connexion</span>
+                    </button>
+                    <button class="tab-btn" id="tabRegister" onclick="switchTab('register')">
+                        <i class="fas fa-user-plus"></i>
+                        <span class="lang-text" data-fr="Créer un compte" data-ar="حساب جديد">Créer un compte</span>
+                    </button>
+                </div>
+
+                <!-- ── LOGIN ── -->
+                <div class="form-section active" id="loginSection">
+                    <div class="form-title lang-text"
+                         data-fr="Bon retour !" data-ar="مرحباً بعودتك">Bon retour !</div>
+                    <div class="form-subtitle lang-text"
+                         data-fr="Entrez vos identifiants pour accéder à la plateforme"
+                         data-ar="أدخل بياناتك للوصول إلى المنصة الفلاحية">
+                        Entrez vos identifiants pour accéder à la plateforme
+                    </div>
+
+                    <form onsubmit="handleLogin(event)">
+                        <div class="input-group">
+                            <label>
+                                <i class="fas fa-user"></i>
+                                <span class="lang-text"
+                                      data-fr="Nom d'utilisateur ou e-mail"
+                                      data-ar="اسم المستخدم أو البريد الإلكتروني">
+                                    Nom d'utilisateur ou e-mail
+                                </span>
+                            </label>
+                            <input type="text" id="login-username"
+                                   class="lang-placeholder"
+                                   data-placeholder-fr="Entrez votre identifiant"
+                                   data-placeholder-ar="أدخل اسم المستخدم"
+                                   placeholder="Entrez votre identifiant" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label>
+                                <i class="fas fa-lock"></i>
+                                <span class="lang-text"
+                                      data-fr="Mot de passe" data-ar="كلمة المرور">
+                                    Mot de passe
+                                </span>
+                            </label>
+                            <input type="password" id="loginPassword"
+                                   placeholder="••••••••" required>
+                        </div>
+
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" checked>
+                                <span class="lang-text"
+                                      data-fr="Se souvenir de moi"
+                                      data-ar="تذكرني">Se souvenir de moi</span>
+                            </label>
+                            <span class="forgot-link lang-text"
+                                  data-fr="Mot de passe oublié ?"
+                                  data-ar="نسيت كلمة المرور؟"
+                                  onclick="alert('Fonctionnalité à venir / الميزة قادمة قريباً')">
+                                Mot de passe oublié ?
+                            </span>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span class="lang-text" data-fr="Se connecter" data-ar="دخول">Se connecter</span>
+                        </button>
+                    </form>
+
+                    <div class="security-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="lang-text"
+                              data-fr="Connexion sécurisée | Plateforme agricole certifiée"
+                              data-ar="اتصال آمن ومشفر | منصة فلاحية موثوقة">
+                            Connexion sécurisée | Plateforme agricole certifiée
+                        </span>
+                    </div>
+                </div>
+
+                <!-- ── REGISTER ── -->
+                <div class="form-section" id="registerSection">
+                    <div class="form-title lang-text"
+                         data-fr="Créer un compte" data-ar="إنشاء حساب جديد">Créer un compte</div>
+                    <div class="form-subtitle lang-text"
+                         data-fr="Rejoignez la plateforme de statistiques agricoles"
+                         data-ar="انضم إلى منصة الإحصاء الفلاحي وساهم في تطوير القطاع">
+                        Rejoignez la plateforme de statistiques agricoles
+                    </div>
+
+                    <form onsubmit="handleRegister(event)">
+                        <div class="two-col">
+                            <div class="input-group">
+                                <label>
+                                    <i class="fas fa-user-circle"></i>
+                                    <span class="lang-text"
+                                          data-fr="Nom complet" data-ar="الاسم الكامل">Nom complet</span>
+                                </label>
+                                <input type="text" id="register-username"
+                                       class="lang-placeholder"
+                                       data-placeholder-fr="Votre nom complet"
+                                       data-placeholder-ar="اسمك الكامل"
+                                       placeholder="Votre nom complet" required>
+                            </div>
+                            <div class="input-group">
+                                <label>
+                                    <i class="fas fa-phone"></i>
+                                    <span class="lang-text"
+                                          data-fr="Téléphone" data-ar="رقم الهاتف">Téléphone</span>
+                                </label>
+                                <input type="tel" id="registerPhone"
+                                       placeholder="05XX XX XX XX" required>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>
+                                <i class="fas fa-envelope"></i>
+                                <span class="lang-text"
+                                      data-fr="Adresse e-mail" data-ar="البريد الإلكتروني">Adresse e-mail</span>
+                            </label>
+                            <input type="email" id="registerEmail"
+                                   placeholder="example@domain.com" required>
+                        </div>
+
+                        <div class="input-group">
+                            <label>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span class="lang-text"
+                                      data-fr="Wilaya (Province)" data-ar="المحافظة (الولاية)">Wilaya (Province)</span>
+                            </label>
+                            <select id="registerWilaya" required>
+                                <option value="" class="lang-text" data-fr="Choisir la wilaya" data-ar="اختر الولاية">Choisir la wilaya</option>
+                                <option value="01">01 - Adrar / أدرار</option>
+                                <option value="02">02 - Chlef / الشلف</option>
+                                <option value="03">03 - Laghouat / الأغواط</option>
+                                <option value="04">04 - Oum El Bouaghi / أم البواقي</option>
+                                <option value="05">05 - Batna / باتنة</option>
+                                <option value="06">06 - Béjaïa / بجاية</option>
+                                <option value="07">07 - Biskra / بسكرة</option>
+                                <option value="08">08 - Béchar / بشار</option>
+                                <option value="09">09 - Blida / البليدة</option>
+                                <option value="10">10 - Bouira / البويرة</option>
+                                <option value="11">11 - Tamanrasset / تمنراست</option>
+                                <option value="12">12 - Tébessa / تبسة</option>
+                                <option value="13">13 - Tlemcen / تلمسان</option>
+                                <option value="14">14 - Tiaret / تيارت</option>
+                                <option value="15">15 - Tizi Ouzou / تيزي وزو</option>
+                                <option value="16">16 - Alger / الجزائر</option>
+                                <option value="17">17 - Djelfa / الجلفة</option>
+                                <option value="18">18 - Jijel / جيجل</option>
+                                <option value="19">19 - Sétif / سطيف</option>
+                                <option value="20">20 - Saïda / سعيدة</option>
+                                <option value="21">21 - Skikda / سكيكدة</option>
+                                <option value="22">22 - Sidi Bel Abbès / سيدي بلعبس</option>
+                                <option value="23">23 - Annaba / عنابة</option>
+                                <option value="24">24 - Guelma / قالمة</option>
+                                <option value="25">25 - Constantine / قسنطينة</option>
+                                <option value="26">26 - Médéa / المدية</option>
+                                <option value="27">27 - Mostaganem / مستغانم</option>
+                                <option value="28">28 - M'Sila / المسيلة</option>
+                                <option value="29">29 - Mascara / معسكر</option>
+                                <option value="30">30 - Ouargla / ورقلة</option>
+                                <option value="31">31 - Oran / وهران</option>
+                                <option value="32">32 - El Bayadh / البيض</option>
+                                <option value="33">33 - Illizi / إليزي</option>
+                                <option value="34">34 - Bordj Bou Arréridj / برج بوعريريج</option>
+                                <option value="35">35 - Boumerdès / بومرداس</option>
+                                <option value="36">36 - El Tarf / الطارف</option>
+                                <option value="37">37 - Tindouf / تندوف</option>
+                                <option value="38">38 - Tissemsilt / تيسمسيلت</option>
+                                <option value="39">39 - El Oued / الوادي</option>
+                                <option value="40">40 - Khenchela / خنشلة</option>
+                                <option value="41">41 - Souk Ahras / سوق أهراس</option>
+                                <option value="42">42 - Tipaza / تيبازة</option>
+                                <option value="43">43 - Mila / ميلة</option>
+                                <option value="44">44 - Ain Defla / عين الدفلى</option>
+                                <option value="45">45 - Naâma / النعامة</option>
+                                <option value="46">46 - Ain Témouchent / عين تموشنت</option>
+                                <option value="47">47 - Ghardaïa / غرداية</option>
+                                <option value="48">48 - Relizane / غليزان</option> 
+                                <option value="49">49 - Timimoun / تيميمون</option>
+                                <option value="50">50 - Bordj Badji Mokhtar / برج باجي مختار</option>
+                                <option value="51">51 - Ouled Djellal / أولاد جلال</option>
+                                <option value="52">52 - Béni Abbès / بني عباس</option>
+                                <option value="53">53 - Ain Salah / عين صالح</option>
+                                <option value="54">54 - Ain Guezzam / عين قزام</option>
+                                <option value="55">55 - Touggourt / تقرت</option>
+                                <option value="56">56 - Djanet / جانت</option>
+                                <option value="57">57 - El M'Ghair / المغير</option>
+                                <option value="58">58 - El Meniaa / المنيعة</option>
+                            
+
+
+                            </select>
+                        </div>
+
+                        <div class="two-col">
+                            <div class="input-group">
+                                <label>
+                                    <i class="fas fa-lock"></i>
+                                    <span class="lang-text"
+                                          data-fr="Mot de passe" data-ar="كلمة المرور">Mot de passe</span>
+                                </label>
+                                <input type="password" id="registerPassword"
+                                       placeholder="••••••••"
+                                       onkeyup="checkPasswordStrength(this.value)" required>
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="strengthFill"></div>
+                                </div>
+                                <div class="strength-text" id="strengthText">
+                                    <span class="lang-text"
+                                          data-fr="Entrez un mot de passe"
+                                          data-ar="أدخل كلمة المرور">Entrez un mot de passe</span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>
+                                    <i class="fas fa-lock"></i>
+                                    <span class="lang-text"
+                                          data-fr="Confirmer le mot de passe"
+                                          data-ar="تأكيد كلمة المرور">Confirmer le mot de passe</span>
+                                </label>
+                                <input type="password" id="registerConfirmPassword"
+                                       placeholder="••••••••" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="lang-text"
+                                  data-fr="Créer le compte" data-ar="إنشاء الحساب">Créer le compte</span>
+                        </button>
+                    </form>
+
+                    <div class="security-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="lang-text"
+                              data-fr="Connexion sécurisée | Plateforme agricole certifiée"
+                              data-ar="اتصال آمن ومشفر | منصة فلاحية موثوقة">
+                            Connexion sécurisée | Plateforme agricole certifiée
+                        </span>
+                    </div>
+                </div>
+
+            </div><!-- /form-panel -->
+        </div><!-- /login-card -->
+    </div><!-- /page-wrapper -->
+
+    <footer>
+        <span class="lang-text"
+              data-fr="© 2026 Ministère de l'Agriculture et du Développement Rural. Tous droits réservés."
+              data-ar="© 2026 وزارة الفلاحة والتنمية الريفية. جميع الحقوق محفوظة.">
+            © 2026 Ministère de l'Agriculture et du Développement Rural. Tous droits réservés.
+        </span>
+    </footer>
+
+    
+
+    <script src="loginHtml.js"></script>
+</body>
+</html>
